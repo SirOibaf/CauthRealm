@@ -2,4 +2,5 @@
 set -e
 mvn clean install
 mvn assembly:assembly
-scp target/otp-auth-1.0-SNAPSHOT-jar-with-dependencies.jar glassfish@snurran.sics.se:/var/www/hops/otp-auth-2.0.jar
+VERSION=`grep -o -a -m 1 -h -r "version>.*</version" ./pom.xml | head -1 | sed "s/version//g" | sed "s/>//" | sed "s/<\///g"`
+scp target/otp-auth-$VERSION-jar-with-dependencies.jar glassfish@snurran.sics.se:/var/www/hops/otp-auth-$VERSION.jar
