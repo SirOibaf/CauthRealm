@@ -589,13 +589,7 @@ public class CustomAuthRealm extends AppservRealm {
       if (rs.next()) {
         // Get the user's credentials
         pwd = rs.getString(1);
-
-        if (HEX.equalsIgnoreCase(getProperty(PARAM_ENCODING))) {
-          // for only normal password          
-          valid = pwd.equalsIgnoreCase(hpwd) && validateOTP(otpCode.substring(0, 12), otpCode.substring(split));                 
-        } else {
-          valid = pwd.equalsIgnoreCase(hpwd) && validateOTP(otpCode.substring(0, 12), otpCode.substring(split));
-        }
+        valid = pwd.equalsIgnoreCase(hpwd) && validateOTP(otpCode.substring(0, 12), otpCode.substring(split));
       }
     } catch (SQLException ex) {
       _logger.log(Level.SEVERE, "CAuth realm invalid Yubikey user step 5", new String[]{user, ex.toString()});
